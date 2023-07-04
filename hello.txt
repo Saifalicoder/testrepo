@@ -1,1 +1,2 @@
-hi
+minor changes 
+this is another change 
