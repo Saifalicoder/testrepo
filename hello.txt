@@ -6,3 +6,4 @@ this is change in second branch
 this is another change in second branch
 this is change from github
 this is new change in second
+new change in main
