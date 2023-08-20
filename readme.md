@@ -60,7 +60,7 @@ This API endpoint allows users to log in to their account by providing their reg
 ```
 ### User Update 
 This API endpoint allows authenticated users to update their profile information. You can modify your first name, last name, and contact number.
-|![Static Badge](https://img.shields.io/badge/Authenticated%20User-blue)|![Static Badge](https://img.shields.io/badge/Method-PATCH-GREEN)| ``` /api/user/update/``` |
+|![Static Badge](https://img.shields.io/badge/Authenticated%20User-blue)|![Static Badge](https://img.shields.io/badge/Method-PATCH-yellow)| ``` /api/user/update/``` |
 | :-------- | :-------- | :------------------------- |
 
 | Parameter | Type     | Description                |
@@ -70,7 +70,7 @@ This API endpoint allows authenticated users to update their profile information
 | `email`| `string`  |  Your Email |
 | `contact_no`| `string`  | Your contact no |
 | `password`| `string`  |Password should contain at least:<br>- One uppercase letter<br>- One lowercase letter<br>- One digit<br>- One special character (@$!%*#?&)<br>- Length between 8 and 15 characters  |
-| `Bearer`| `Access token`  | **Required.** Your have to pass the access token in the authorization header which was received after login in order to upload a file |
+| `Bearer`| `Access token`  | **Required.** Your have to pass the access token in the authorization header which was received after login|
 
 **Response**
 |Data | Response Type     | Respnonse Message                |
@@ -85,3 +85,47 @@ This API endpoint allows authenticated users to update their profile information
 "first_name":"new_first_name",
 }
 ```
+### User Gdrive link 
+This API endpoint allows authenticated users to upload the gdrive tokens.
+|![Static Badge](https://img.shields.io/badge/Authenticated%20User-blue)|![Static Badge](https://img.shields.io/badge/Method-POST-GREEN)| ``` /api/user/gdrive/``` |
+| :-------- | :-------- | :------------------------- |
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `gdrive_accesstoken` | `string` | **Required.** User gdrive access token |
+| `gdrive_refreshtoken` | `string` | **Required.** User gdrive refresh token |
+| `gdrive_expiry_time`| `string`  |  **Required.** User gdrive expiry time |
+| `Bearer`| `Access token`  | **Required.** Your have to pass the access token in the authorization header which was received after login |
+
+**Response**
+|Data | Response Type     | Respnonse Message                |
+|  :-------|  :------- | :------------------------- |
+|Valid Data| ![Static Badge](https://img.shields.io/badge/SUCCESS-GREEN) | `{"message":"Gdrive linked successfully"}` |
+|Token Missing| ![Static Badge](https://img.shields.io/badge/ERROR-red)| `{"error":"Access / Refresh token missing"}` |
+|Expiry time missing| ![Static Badge](https://img.shields.io/badge/ERROR-red)| `{"error":"Expiry time is missing"}` |
+
+**Example**
+```http
+{
+"gdrive_accesstoken":"access_token",
+"gdrive_refreshtoken":"refresh_token",
+"gdrive_expiry_time":"expiry_time",
+}
+```
+### User Get Gdrive Token
+This API endpoint allows authenticated users to get the gdrive token.
+|![Static Badge](https://img.shields.io/badge/Authenticated%20User-blue)|![Static Badge](https://img.shields.io/badge/Method-GET-blue)| ``` /api/user/gdrive/token/``` |
+| :-------- | :-------- | :------------------------- |
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `Bearer`| `Access token`  | **Required.** Your have to pass the access token in the authorization header which was received after login |
+
+**Response**
+| Response Type     | Respnonse Message                |
+|  :------- | :------------------------- |
+| ![Static Badge](https://img.shields.io/badge/SUCCESS-GREEN) | {"data":{<br>"gdrive_accesstoken":"access_token",<br>"gdrive_refreshtoken":"refresh_token",<br>"gdrive_expiry_time":"expiry_time",}<br>} |
+
+
+
+
